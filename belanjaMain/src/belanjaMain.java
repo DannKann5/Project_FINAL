@@ -1,5 +1,6 @@
-public class belanjaMain {
-    public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
-    }
+public class diskonBelanja {
+    public static void main(String[] args) {
+
+    System.out.println("anajay");
+}
 }
