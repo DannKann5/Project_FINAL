@@ -1,10 +1,7 @@
 public class Diskon {
-
-    
     private double persentase;      
     private double minimalBelanja;  
 
-    
     public Diskon(double persentase, double minimalBelanja) {
         this.persentase = persentase;
         this.minimalBelanja = minimalBelanja;
