@@ -15,7 +15,6 @@ public class Diskon {
             return 0;
         }
     }
-
     // Hitung total yang harus dibayar
     public double hitungTotalBayar(double totalBelanja) {
         return totalBelanja - hitungDiskon(totalBelanja);
