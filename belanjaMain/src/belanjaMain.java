@@ -3,6 +3,8 @@ import java.util.Scanner;
 public class belanjaMain {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
+        Diskon diskon = new Diskon(0.0, 0.0);
+        double persentase = diskon.getPersentase(totalBelanja);
 
         //Instansiasi beberapa barang
         barangHarga chiki = new barangHarga("Chiki", "SN01", "Snack", 3000);
