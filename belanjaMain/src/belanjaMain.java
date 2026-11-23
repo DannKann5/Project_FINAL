@@ -26,23 +26,14 @@ public class belanjaMain {
         Diskon diskon = new Diskon(0.0, 0.0);
         stokBarang stok = new stokBarang();
 
-        // Opening + ukuran keranjang
         System.out.println("=============== SELAMAT DATANG ===============");
-        int kapasitas = 0;
-        while (kapasitas == 0) {
-            System.out.print("Pilih ukuran keranjang (besar/sedang/kecil): ");
-            String ukuran = sc.nextLine();
-            kapasitas = Keranjang.ukuranKeranjang(ukuran);
-            if (kapasitas == 0) {
-                System.out.println("Ukuran invalid! harap masukkan ukuran dengan benar (besar/sedang/kecil)");
-            }
-        }
 
-        Keranjang keranjang = new Keranjang(kapasitas, diskon);
+        // Ukuran keranjang = jumlah jenis barang di toko (tidak perlu dipilih lagi)
+        Keranjang keranjang = new Keranjang(daftar.length, diskon);
 
         // Catatan isi keranjang di main (dipakai saat checkout untuk mengurangi stok)
-        String[] kodeKeranjang = new String[kapasitas];
-        int[] jmlKeranjang = new int[kapasitas];
+        String[] kodeKeranjang = new String[daftar.length];
+        int[] jmlKeranjang = new int[daftar.length];
         int jumlahItem = 0;
 
         int pilihan = -1;
@@ -51,9 +42,8 @@ public class belanjaMain {
             System.out.println("1. Lihat barang dan harga");
             System.out.println("2. Cek stok barang");
             System.out.println("3. Masukkan barang ke keranjang");
-            System.out.println("4. Lihat keranjang");
-            System.out.println("5. Info diskon");
-            System.out.println("6. Checkout");
+            System.out.println("4. Info diskon");
+            System.out.println("5. Checkout");
             System.out.println("0. Keluar");
             System.out.print("Pilih menu: ");
             pilihan = sc.nextInt();
@@ -62,7 +52,6 @@ public class belanjaMain {
             switch (pilihan) {
 
                 case 1:
-                    // LIHAT BARANG DAN HARGA
                     System.out.println("=============== DAFTAR BARANG ===============");
                     for (int i = 0; i < daftar.length; i++) {
                         System.out.println(daftar[i].getKode() + " | " + daftar[i].getNama()
@@ -72,13 +61,11 @@ public class belanjaMain {
                     break;
 
                 case 2:
-                    // CEK STOK
                     System.out.println("=============== STOK BARANG ===============");
                     stok.tampilkanStok();
                     break;
 
                 case 3:
-                    // MASUKKAN KE KERANJANG
                     System.out.print("Kode barang : ");
                     String kode = sc.nextLine();
                     barangHarga b = cariBarang(daftar, kode);
@@ -92,43 +79,49 @@ public class belanjaMain {
                     int jml = sc.nextInt();
                     sc.nextLine();
 
+                    // cari: barang ini sudah ada di catatan keranjang? (-1 = belum)
+                    int posisi = -1;
+                    for (int i = 0; i < jumlahItem; i++) {
+                        if (kodeKeranjang[i].equals(b.getKode())) {
+                            posisi = i;
+                        }
+                    }
+
+                    int sudahAda = 0;
+                    if (posisi != -1) {
+                        sudahAda = jmlKeranjang[posisi];
+                    }
+                    int sisa = stok.cekStok(b.getKode()) - sudahAda;
+
                     if (jml <= 0) {
                         System.out.println("Jumlah harus lebih dari 0.");
-                    } else if (jumlahItem >= kapasitas) {
-                        System.out.println("Keranjang penuh.");
-                    } else if (stok.cekStok(b.getKode()) < jml) {
-                        System.out.println("Stok " + b.getNama() + " tidak cukup. Sisa stok: "
-                                + stok.cekStok(b.getKode()));
+                    } else if (jml > sisa) {
+                        System.out.println("Stok " + b.getNama() + " tidak cukup. Sisa yang bisa dibeli: " + sisa);
                     } else {
                         keranjang.tambahBarang(b, jml);
-                        kodeKeranjang[jumlahItem] = b.getKode();
-                        jmlKeranjang[jumlahItem] = jml;
-                        jumlahItem++;
+                        if (posisi == -1) {
+                            // barang baru, pakai kotak baru
+                            kodeKeranjang[jumlahItem] = b.getKode();
+                            jmlKeranjang[jumlahItem] = jml;
+                            jumlahItem++;
+                        } else {
+                            // barang sudah ada, tambah jumlahnya saja
+                            jmlKeranjang[posisi] += jml;
+                        }
                     }
                     break;
 
                 case 4:
-                    // LIHAT KERANJANG
-                    keranjang.tampilkan();
-                    break;
-
-                case 5:
-                    // INFO DISKON
                     diskon.tampilkanDiskon();
                     break;
 
-                case 6:
-                    // CHECKOUT
+                case 5:
                     if (jumlahItem == 0) {
                         System.out.println("Keranjang masih kosong.");
                         break;
                     }
 
                     double totalBelanja = keranjang.hitungTotal();
-
-                    // DISKON dihitung di sini, setelah total belanja diketahui
-                    double persentase = diskon.getPersentase(totalBelanja);
-                    double potongan = diskon.hitungDiskon(totalBelanja);
                     double totalBayar = diskon.hitungTotalBayar(totalBelanja);
 
                     // STOK berkurang saat checkout
@@ -138,7 +131,7 @@ public class belanjaMain {
 
                     System.out.println("=============== STRUK ===============");
                     keranjang.tampilkan();
-                    diskon.tampilkanDiskon(totalBelanja);   
+                    diskon.tampilkanDiskon(totalBelanja);
                     System.out.println("Total bayar   : Rp" + totalBayar);
                     System.out.println("Checkout berhasil. Terima kasih!");
 
@@ -146,7 +139,7 @@ public class belanjaMain {
                     stok.tampilkanStok();
 
                     // Kosongkan keranjang untuk belanja berikutnya
-                    keranjang = new Keranjang(kapasitas, diskon);
+                    keranjang = new Keranjang(daftar.length, diskon);
                     jumlahItem = 0;
                     break;
 

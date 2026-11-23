@@ -4,22 +4,11 @@ public class Keranjang {
     private int jumlahItem = 0;
     private Diskon diskon;
 
-    public Keranjang(int kapasitas, Diskon diskon) {
-        barang = new barangHarga[kapasitas];
-        jumlah = new int[kapasitas];
+    // jenisBarang = banyaknya jenis barang yang dijual toko
+    public Keranjang(int jenisBarang, Diskon diskon) {
+        barang = new barangHarga[jenisBarang];
+        jumlah = new int[jenisBarang];
         this.diskon = diskon;
-    }
-
-    public static int ukuranKeranjang(String ukuran) {
-        if (ukuran.equalsIgnoreCase("besar")) {
-            return 10;
-        } else if (ukuran.equalsIgnoreCase("sedang")) {
-            return 5;
-        } else if (ukuran.equalsIgnoreCase("kecil")) {
-            return 3;
-        } else {
-            return 0;
-        }
     }
 
     public void tambahBarang(barangHarga b, int jml) {
@@ -27,11 +16,17 @@ public class Keranjang {
             System.out.println("Jumlah harus lebih dari 0.");
             return;
         }
-        if (jumlahItem >= barang.length) {
-            System.out.println("Keranjang penuh.");
-            return;
+
+        // kalau barang sudah ada di keranjang, cukup tambah jumlahnya
+        for (int i = 0; i < jumlahItem; i++) {
+            if (barang[i] == b) {
+                jumlah[i] += jml;
+                System.out.println("Jumlah " + b.getNama() + " di keranjang jadi " + jumlah[i]);
+                return;
+            }
         }
-        // Pengecekan stok dihapus, karena stok diurus oleh class stokBarang di main
+
+        // barang belum ada, pakai kotak baru
         barang[jumlahItem] = b;
         jumlah[jumlahItem] = jml;
         jumlahItem++;
