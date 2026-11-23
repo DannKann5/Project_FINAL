@@ -3,18 +3,14 @@ public class barangHarga {
     private String kode;
     private String kategori;
     private double harga;
-    private int[] stok;
+    private int stok;
 
-    public barangHarga(String namaBarang, String kodeBarang, String kategoriBarang, double hargaBarang) {
+    public barangHarga(String namaBarang, String kodeBarang, String kategoriBarang, double hargaBarang, int stokBarang) {
         nama = namaBarang;
         kode = kodeBarang;
         kategori = kategoriBarang;
         harga = hargaBarang;
-        stok = stokBarang.getStok();
-    }
-
-    public int[] getStok() {
-        return stok;
+        stok = stokBarang;
     }
 
     public String getNama() {
@@ -33,4 +29,7 @@ public class barangHarga {
         return harga;
     }
 
+    public int getStok() {
+        return stok;
+    }
 }
