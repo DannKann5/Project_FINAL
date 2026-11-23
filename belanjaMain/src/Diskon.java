@@ -31,5 +31,13 @@ public class Diskon {
     public double hitungTotalBayar(double totalBelanja) {
         return totalBelanja - hitungDiskon(totalBelanja);
     }
+    public void tampilkanDiskon() {
+        System.out.println("======================INFO DISKON======================");
+        System.out.println("Belanja lebih dari 300.000 ribu mendapatkan diskon 20%");
+        System.out.println("Belanja lebih dari 150.000 ribu mendapatkan diskon 15%");
+        System.out.println("Belanja lebih dari 100.000 ribu mendapatkan diskon 10%");
+        System.out.println("Belanja lebih dari 100.000 ribu mendapatkan diskon 5%");
+        
+    }
 
 }
