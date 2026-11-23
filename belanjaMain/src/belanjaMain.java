@@ -3,8 +3,6 @@ import java.util.Scanner;
 public class belanjaMain {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
-        Diskon diskon = new Diskon(0.0, 0.0);
-        double persentase = diskon.getPersentase(totalBelanja);
 
         //Instansiasi beberapa barang
         barangHarga chiki = new barangHarga("Chiki", "SN01", "Snack", 3000);
@@ -12,6 +10,7 @@ public class belanjaMain {
         barangHarga gtgkunci = new barangHarga("Gantungan Kunci", "AR02", "Aksesoris", 5000);
         barangHarga tehpucuk = new barangHarga("Teh Pucuk", "MN02", "Minuman", 5000);
 
+<<<<<<< HEAD
         //Opening + Ukuran Keranjang
         System.out.println("=============== SELAMAT DATANG ===============");
         int kapasitas = 0;
@@ -28,6 +27,7 @@ public class belanjaMain {
         //Set Array
         Keranjang[] keranjang = new Keranjang[kapasitas];
 
+=======
         stokBarang stok = new stokBarang();
 
         System.out.println(chiki.getNama() + " stok : " + stok.cekStok(chiki.getKode()));
@@ -39,5 +39,6 @@ public class belanjaMain {
         }
 
         stok.tampilkanStok();
+>>>>>>> 103680452c182d14b20aa1e2867d0eea49326e61
     }
 }
