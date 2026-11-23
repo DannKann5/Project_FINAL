@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+
 public class stokBarang {
     private ArrayList<String> kode = new ArrayList<>();
     private ArrayList<Integer> stok = new ArrayList<>();
@@ -14,10 +15,10 @@ public class stokBarang {
         kode.add(kodeBarang);
         stok.add(jumlah);
     }
-    
+
     private int cariIndex(String kodeBarang) {
         for (int i = 0; i < kode.size(); i++) {
-            if (kode.get(i).equals(kodeBarang)) {
+            if (kode.get(i).equalsIgnoreCase(kodeBarang)) {
                 return i;
             }
         }

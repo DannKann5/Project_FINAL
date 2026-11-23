@@ -31,11 +31,7 @@ public class Keranjang {
             System.out.println("Keranjang penuh.");
             return;
         }
-        int stokTersedia = b.getStok()[0];
-        if (jml > stokTersedia) {
-            System.out.println("Stok " + b.getNama() + " tidak cukup. Sisa stok: " + stokTersedia);
-            return;
-        }
+        // Pengecekan stok dihapus, karena stok diurus oleh class stokBarang di main
         barang[jumlahItem] = b;
         jumlah[jumlahItem] = jml;
         jumlahItem++;
@@ -58,7 +54,8 @@ public class Keranjang {
         double total = hitungTotal();
         System.out.println("=============== ISI KERANJANG ===============");
         for (int i = 0; i < jumlahItem; i++) {
-            System.out.println((i + 1) + ". " + barang[i].getNama() + " | " + jumlah[i] + " x " + barang[i].getHarga() + " = " + (barang[i].getHarga() * jumlah[i]));
+            System.out.println((i + 1) + ". " + barang[i].getNama() + " | " + jumlah[i] + " x "
+                    + barang[i].getHarga() + " = " + (barang[i].getHarga() * jumlah[i]));
         }
         System.out.println("Total          : " + total);
         System.out.println("Diskon         : " + diskon.hitungDiskon(total));
