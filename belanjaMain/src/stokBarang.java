@@ -1,6 +1,6 @@
 public class stokBarang {
     private String[] kode = { "SN01", "AR01", "AR02", "MN02" };
-    private int[] stok = { 10, 8, 5, 2 };
+    private static int[] stok = { 10, 8, 5, 2 };
 
     private int cariIndex(String kodeBarang) {
         for (int i = 0; i < kode.length; i++) {
@@ -9,6 +9,10 @@ public class stokBarang {
             }
         }
         return -1;
+    }
+
+    public static int[] getStok() {
+        return stok;
     }
 
     public int cekStok(String kodeBarang) {
