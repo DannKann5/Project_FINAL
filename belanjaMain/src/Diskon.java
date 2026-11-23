@@ -6,6 +6,7 @@ public class Diskon {
         this.persentase = persentase;
         this.minimalBelanja = minimalBelanja;
     }
+
     public double getPersentase(double totalBelanja) {
         if(totalBelanja >= 300000) {
             return 20;
