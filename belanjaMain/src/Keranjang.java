@@ -31,8 +31,9 @@ public class Keranjang {
             System.out.println("Keranjang penuh.");
             return;
         }
-        if (jml > b.getStok()) {
-            System.out.println("Stok " + b.getNama() + " tidak cukup. Sisa stok: " + b.getStok());
+        int stokTersedia = b.getStok()[0];
+        if (jml > stokTersedia) {
+            System.out.println("Stok " + b.getNama() + " tidak cukup. Sisa stok: " + stokTersedia);
             return;
         }
         barang[jumlahItem] = b;

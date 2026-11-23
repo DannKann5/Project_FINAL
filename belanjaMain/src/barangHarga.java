@@ -10,7 +10,6 @@ public class barangHarga {
         kode = kodeBarang;
         kategori = kategoriBarang;
         harga = hargaBarang;
-        stok = stokBarang.getStok();
     }
 
     public int[] getStok() {
