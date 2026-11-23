@@ -28,6 +28,7 @@ public class belanjaMain {
         //Set Array
         Keranjang[] keranjang = new Keranjang[kapasitas];
 
+        //STTOK BARANG
         stokBarang stok = new stokBarang();
 
         System.out.println(chiki.getNama() + " stok : " + stok.cekStok(chiki.getKode()));

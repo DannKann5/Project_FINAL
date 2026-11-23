@@ -1,10 +1,23 @@
+import java.util.ArrayList;
 public class stokBarang {
-    private String[] kode = { "SN01", "AR01", "AR02", "MN02" };
-    private int[] stok = { 10, 8, 5, 2 };
+    private ArrayList<String> kode = new ArrayList<>();
+    private ArrayList<Integer> stok = new ArrayList<>();
 
+    public stokBarang() {
+        tambahBarang("SN01", 30);
+        tambahBarang("AR01", 20);
+        tambahBarang("AR02", 15);
+        tambahBarang("MN01", 25);
+    }
+
+    public void tambahBarang(String kodeBarang, int jumlah) {
+        kode.add(kodeBarang);
+        stok.add(jumlah);
+    }
+    
     private int cariIndex(String kodeBarang) {
-        for (int i = 0; i < kode.length; i++) {
-            if (kode[i].equals(kodeBarang)) {
+        for (int i = 0; i < kode.size(); i++) {
+            if (kode.get(i).equals(kodeBarang)) {
                 return i;
             }
         }
@@ -16,24 +29,24 @@ public class stokBarang {
         if (i == -1) {
             return 0;
         }
-        return stok[i];
+        return stok.get(i);
     }
 
     public boolean kurangiStok(String kodeBarang, int jumlahBeli) {
         int i = cariIndex(kodeBarang);
-        if (i == -1 || stok[i] < jumlahBeli) {
+        if (i == -1 || stok.get(i) < jumlahBeli) {
             return false;
         }
-        stok[i] = stok[i] - jumlahBeli;
+        stok.set(i, stok.get(i) - jumlahBeli);
         return true;
     }
 
     public void tampilkanStok() {
-        for (int i = 0; i < kode.length; i++) {
-            if (stok[i] == 0) {
-                System.out.println(kode[i] + " : Habis");
+        for (int i = 0; i < kode.size(); i++) {
+            if (stok.get(i) == 0) {
+                System.out.println(kode.get(i) + " : Habis");
             } else {
-                System.out.println(kode[i] + " : " + stok[i]);
+                System.out.println(kode.get(i) + " : " + stok.get(i));
             }
         }
     }
