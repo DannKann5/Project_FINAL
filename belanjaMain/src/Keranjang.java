@@ -10,18 +10,6 @@ public class Keranjang {
         this.diskon = diskon;
     }
 
-    public static int ukuranKeranjang(String ukuran) {
-        if (ukuran.equalsIgnoreCase("besar")) {
-            return 10;
-        } else if (ukuran.equalsIgnoreCase("sedang")) {
-            return 5;
-        } else if (ukuran.equalsIgnoreCase("kecil")) {
-            return 3;
-        } else {
-            return 0;
-        }
-    }
-
     public void tambahBarang(barangHarga b, int jml) {
         if (jml <= 0) {
             System.out.println("Jumlah harus lebih dari 0.");
