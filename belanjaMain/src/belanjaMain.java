@@ -26,5 +26,16 @@ public class belanjaMain {
         //Set Array
         Keranjang[] keranjang = new Keranjang[kapasitas];
 
+        stokBarang stok = new stokBarang();
+
+        System.out.println(chiki.getNama() + " stok : " + stok.cekStok(chiki.getKode()));
+
+        if (stok.kurangiStok(chiki.getKode(), 3)) {
+            System.out.println("Checkout berhasil");
+        } else {
+            System.out.println("Stok barang tidak cukup");
+        }
+
+        stok.tampilkanStok();
     }
 }
